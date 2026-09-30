@@ -2,21 +2,21 @@
 <html lang="pt-BR" class="h-full bg-[#1E1E21]">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DALLIDO.1988 — A PISTA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
       --bg-graphite: #1E1E21;
-      --bg-graphite-deep: #161618;
+      --bg-graphite-deep: #141416;
       --bg-graphite-card: #252529;
       --text-main: #F2F1ED;
       --text-muted: #A4A29C;
       --text-faint: #63625D;
-      --line-graphite: rgba(255, 255, 255, 0.09);
+      --line-graphite: rgba(255, 255, 255, 0.08);
       --accent-gold: #BFA175;
       --accent-silver: #D4D2CB;
     }
@@ -25,15 +25,18 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
       background-color: var(--bg-graphite);
       color: var(--text-main);
-      font-family: "Helvetica Neue", Helvetica, "Jost", "Futura", Arial, sans-serif;
+      font-family: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 300;
-      overflow: hidden;
-      user-select: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -49,22 +52,45 @@
     /* VIEWPORT HORIZONTAL DE SALAS */
     .viewport-container {
       width: 100vw;
-      height: 100vh;
+      height: 100%;
+      height: 100dvh;
       display: flex;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
     }
 
     .slide-room {
       width: 100vw;
-      height: 100vh;
+      height: 100%;
+      height: 100dvh;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5.5rem 4rem 4.5rem 4rem;
       position: relative;
-      background: radial-gradient(circle at 50% 45%, #232327 0%, #1A1A1D 90%);
+      background: radial-gradient(circle at 50% 45%, #242428 0%, #171719 90%);
+      padding: 4.75rem 1.25rem 4.5rem 1.25rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (min-width: 768px) {
+      .slide-room {
+        padding: 5.5rem 3.5rem 4.75rem 3.5rem;
+        overflow-y: hidden;
+      }
+    }
+
+    /* Custom scrollbar suave para salas no mobile */
+    .slide-room::-webkit-scrollbar {
+      width: 4px;
+    }
+    .slide-room::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .slide-room::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
     }
 
     /* QUADROS / OBRAS COM ZOOM */
@@ -72,30 +98,37 @@
       position: relative;
       cursor: zoom-in;
       display: inline-block;
-      max-width: 86vw;
+      max-width: 100%;
       box-shadow: 
-        0 10px 30px -5px rgba(0, 0, 0, 0.6),
-        0 30px 80px -15px rgba(0, 0, 0, 0.8);
+        0 10px 25px -5px rgba(0, 0, 0, 0.6),
+        0 25px 60px -15px rgba(0, 0, 0, 0.85);
       border-radius: 1px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
 
     .artwork-frame-interactive:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(-3px);
       box-shadow: 
-        0 15px 40px -5px rgba(0, 0, 0, 0.7),
-        0 40px 100px -15px rgba(0, 0, 0, 0.9);
-      border-color: rgba(255, 255, 255, 0.15);
+        0 15px 35px -5px rgba(0, 0, 0, 0.7),
+        0 35px 80px -15px rgba(0, 0, 0, 0.95);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .artwork-frame-interactive img {
-      max-height: 70vh;
-      max-width: 78vw;
+      max-height: 52vh;
+      max-width: 90vw;
       width: auto;
       height: auto;
       display: block;
       object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+      .artwork-frame-interactive img {
+        max-height: 68vh;
+        max-width: 78vw;
+      }
     }
 
     /* QUADROS EM SALAS SPLIT (CAPA COM TEXTO) */
@@ -105,23 +138,20 @@
       display: inline-block;
       max-width: 100%;
       box-shadow: 
-        0 10px 30px -5px rgba(0, 0, 0, 0.6),
-        0 30px 80px -15px rgba(0, 0, 0, 0.8);
+        0 10px 25px -5px rgba(0, 0, 0, 0.6),
+        0 25px 60px -15px rgba(0, 0, 0, 0.85);
       border-radius: 1px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .split-artwork-frame:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 
-        0 15px 40px -5px rgba(0, 0, 0, 0.7),
-        0 40px 100px -15px rgba(0, 0, 0, 0.9);
+      transform: translateY(-3px);
       border-color: rgba(255, 255, 255, 0.2);
     }
 
     .split-artwork-frame img {
-      max-height: 58vh;
+      max-height: 42vh;
       max-width: 100%;
       width: auto;
       height: auto;
@@ -130,58 +160,46 @@
       border-radius: 1px;
     }
 
-    .zoom-badge {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      background: rgba(15, 15, 16, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #EDEDEB;
-      padding: 0.35rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none;
-    }
-
-    .artwork-frame-interactive:hover .zoom-badge,
-    .split-artwork-frame:hover .zoom-badge {
-      opacity: 1;
-      transform: translateY(0);
+    @media (min-width: 768px) {
+      .split-artwork-frame img {
+        max-height: 56vh;
+      }
     }
 
     /* ETIQUETA DE GALERIA SUIÇA */
     .gallery-placard {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-top: 1.75rem;
+      margin-top: 1.25rem;
       text-align: center;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.4rem 0.6rem;
     }
 
     /* CARD DE APRESENTAÇÃO EDITORIAL */
     .graphite-editorial-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 3.5rem;
-      border-radius: 1px;
+      padding: 1.5rem;
+      border-radius: 2px;
+    }
+
+    @media (min-width: 768px) {
+      .graphite-editorial-card {
+        padding: 3rem;
+      }
     }
 
     /* BOTÕES DE NAVEGAÇÃO */
     .graphite-nav-btn {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--bg-graphite-card);
       border: 1px solid var(--line-graphite);
@@ -189,8 +207,15 @@
       align-items: center;
       justify-content: center;
       color: var(--text-main);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
       cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .graphite-nav-btn {
+        width: 44px;
+        height: 44px;
+      }
     }
 
     .graphite-nav-btn:hover:not(:disabled) {
@@ -200,7 +225,7 @@
     }
 
     .graphite-nav-btn:disabled {
-      opacity: 0.15;
+      opacity: 0.2;
       cursor: not-allowed;
     }
 
@@ -209,14 +234,15 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(12, 12, 14, 0.98);
-      backdrop-filter: blur(14px);
+      background: rgba(10, 10, 12, 0.96);
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.35s ease;
+      padding: 1rem;
     }
 
     .lightbox-overlay.active {
@@ -226,46 +252,62 @@
 
     .lightbox-content {
       position: relative;
-      max-width: 94vw;
-      max-height: 90vh;
+      max-width: 96vw;
+      max-height: 90dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       cursor: zoom-out;
     }
 
     .lightbox-content img {
-      max-width: 94vw;
-      max-height: 88vh;
+      max-width: 92vw;
+      max-height: 76dvh;
       object-fit: contain;
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1px;
     }
 
     .graphite-progress {
       height: 1.5px;
       background: var(--text-main);
-      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .zoom-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
     }
   </style>
 </head>
-<body class="h-full flex flex-col justify-between">
+<body class="h-full flex flex-col justify-between select-none">
 
   <!-- CABEÇALHO GRAFITE (FIXO) -->
-  <header class="fixed top-0 left-0 right-0 z-40 px-10 py-6 flex items-center justify-between border-b border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
-    <div class="flex items-center gap-6">
-      <span class="font-futura text-lg tracking-[0.25em] text-white uppercase font-medium">
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 lg:px-10 py-3.5 sm:py-5 flex items-center justify-between border-b border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
+    <div class="flex items-center gap-2.5 sm:gap-5">
+      <span class="font-futura text-sm sm:text-base lg:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase font-medium">
         DALLIDO.1988
       </span>
       <span class="text-white/20 text-xs">/</span>
-      <span class="font-mono text-[10px] tracking-[0.25em] text-[#A4A29C] uppercase">
-        MINISSÉRIE: A PISTA &bull; VOL. 02
+      <span class="font-mono text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] text-[#A4A29C] uppercase truncate max-w-[140px] sm:max-w-none">
+        A PISTA
       </span>
     </div>
 
-    <div class="flex items-center gap-8">
-      <span id="roomIndicator" class="font-mono text-[10px] tracking-[0.25em] text-[#A4A29C]">
+    <div class="flex items-center gap-4 sm:gap-8">
+      <span id="roomIndicator" class="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#A4A29C]">
         01 / 08
       </span>
-      <button onclick="toggleSound()" id="soundToggleBtn" class="font-mono text-[10px] tracking-widest text-[#A4A29C] hover:text-white transition flex items-center gap-1.5">
-        <span id="soundIcon">●</span> <span id="soundLabel">SOM</span>
+      <button onclick="toggleSound()" id="soundToggleBtn" class="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#A4A29C] hover:text-white transition flex items-center gap-1.5 py-1 px-2 rounded bg-white/[0.03] border border-white/[0.06]" title="Alternar áudio tátil">
+        <span id="soundIcon" class="text-[8px] text-white">●</span> <span id="soundLabel">SOM</span>
       </button>
     </div>
   </header>
@@ -275,43 +317,43 @@
 
     <!-- SALA 01: ABERTURA -->
     <section class="slide-room" data-index="0">
-      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-center my-auto">
         
-        <div class="lg:col-span-5 space-y-6 lg:space-y-8 text-left z-10">
-          <div class="space-y-3">
-            <span class="font-mono text-[9px] tracking-[0.4em] text-[#BFA175] uppercase block">
-              MINISSÉRIE VISUAL &bull; DESDOBRAMENTO DE A DANÇA
+        <div class="lg:col-span-5 space-y-4 sm:space-y-6 lg:space-y-8 text-left z-10 order-2 lg:order-1">
+          <div class="space-y-1.5 sm:space-y-3">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.35em] sm:tracking-[0.4em] text-[#BFA175] uppercase block">
+              MINISSÉRIE &bull; DESDOBRAMENTO DE A DANÇA
             </span>
-            <h1 class="font-futura text-4xl sm:text-5xl lg:text-6xl font-light tracking-[0.18em] uppercase text-white leading-[1.05]">
+            <h1 class="font-futura text-3xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.18em] uppercase text-white leading-[1.05]">
               A PISTA
             </h1>
-            <p class="font-futura text-sm sm:text-base lg:text-lg tracking-[0.2em] text-[#A4A29C] uppercase pt-1">
+            <p class="font-futura text-xs sm:text-base lg:text-lg tracking-[0.18em] sm:tracking-[0.2em] text-[#A4A29C] uppercase pt-0.5">
               SÃO PAULO &bull; DALLIDO.1988
             </p>
           </div>
 
-          <div class="w-12 h-[1px] bg-[#BFA175]/50"></div>
+          <div class="w-10 sm:w-12 h-[1px] bg-[#BFA175]/50"></div>
 
-          <p class="text-xs text-[#A4A29C] leading-relaxed max-w-sm font-light tracking-wide">
+          <p class="text-xs sm:text-sm text-[#A4A29C] leading-relaxed max-w-sm font-light tracking-wide">
             Se <em>A Dança</em> observa o corpo em movimento, <em>A Pista</em> desloca o olhar para aquilo que permanece ao redor dele: o calçado, a roupa, o chão, os objetos e as marcas de uma situação.
           </p>
 
-          <div class="pt-2 flex items-center gap-4">
-            <button onclick="goToSlide(1)" class="px-6 py-3 bg-white text-[#1E1E21] text-xs font-mono tracking-[0.25em] uppercase hover:bg-[#D4D2CB] transition rounded-sm font-medium shadow-md">
+          <div class="pt-1 sm:pt-2 flex items-center gap-3 sm:gap-4">
+            <button onclick="goToSlide(1)" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-[#1E1E21] text-[10px] sm:text-xs font-mono tracking-[0.22em] uppercase hover:bg-[#D4D2CB] transition rounded-sm font-medium shadow-md">
               EXPLORAR MINISSÉRIE &rarr;
             </button>
-            <span class="font-mono text-[9px] text-[#63625D] tracking-widest hidden sm:inline-block">
+            <span class="font-mono text-[8px] sm:text-[9px] text-[#63625D] tracking-widest hidden sm:inline-block">
               [SETAS ← →]
             </span>
           </div>
         </div>
 
-        <!-- Obra de Abertura Proporcional e Enquadrada -->
-        <div class="lg:col-span-7 flex justify-center lg:justify-end items-center">
+        <!-- Obra de Abertura -->
+        <div class="lg:col-span-7 flex flex-col justify-center items-center lg:items-end order-1 lg:order-2">
           <div class="split-artwork-frame" onclick="openLightbox('./pista-obra-01.png', 'A PISTA — RECONSTRUÇÃO I', 'MINISSÉRIE DALLIDO.1988, SÃO PAULO')">
             <img src="./pista-obra-01.png" alt="A Pista — Obra I" loading="eager">
-            <div class="zoom-badge">🔍 Clique para Ampliar</div>
           </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
       </div>
     </section>
@@ -319,17 +361,17 @@
 
     <!-- SALA 02: TEXTO CURATORIAL / APRESENTAÇÃO -->
     <section class="slide-room" data-index="1">
-      <div class="max-w-4xl graphite-editorial-card space-y-6 text-left max-h-[82vh] overflow-y-auto pr-2">
-        <div class="space-y-2 border-b border-white/[0.08] pb-4">
-          <span class="font-mono text-[9px] tracking-[0.35em] text-[#BFA175] uppercase block">
+      <div class="max-w-4xl graphite-editorial-card space-y-4 sm:space-y-6 text-left my-auto mx-auto w-full">
+        <div class="space-y-1.5 border-b border-white/[0.08] pb-3 sm:pb-4">
+          <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.3em] text-[#BFA175] uppercase block">
             MINISSÉRIE &bull; DALLIDO.1988
           </span>
-          <h2 class="font-futura text-2xl lg:text-3xl font-light text-white tracking-[0.12em] uppercase">
+          <h2 class="font-futura text-lg sm:text-2xl lg:text-3xl font-light text-white tracking-[0.1em] sm:tracking-[0.12em] uppercase leading-tight">
             A PISTA
           </h2>
         </div>
 
-        <div class="space-y-4 text-[#D4D2CB] text-sm lg:text-base font-light leading-relaxed text-justify tracking-wide">
+        <div class="space-y-3 sm:space-y-4 text-[#D4D2CB] text-xs sm:text-sm lg:text-base font-light leading-relaxed text-justify tracking-wide">
           <p>
             <em>A Pista</em> é um desdobramento de <em>A Dança</em>.
           </p>
@@ -348,21 +390,21 @@
           <p>
             O mesmo acontece com a roupa e com o chão. O corpo vai desaparecendo enquanto os elementos que o cercavam ganham autonomia. Na última imagem, já não há corpo. Há apenas a superfície onde aquela experiência aconteceu.
           </p>
-          <div class="my-4 py-3 px-4 bg-white/[0.03] border-l-2 border-[#BFA175] rounded-r">
-            <span class="font-mono text-[10px] tracking-[0.25em] text-[#BFA175] uppercase block mb-1">O Deslocamento</span>
-            <p class="font-futura text-base lg:text-lg tracking-[0.15em] text-white uppercase font-normal">
+          <div class="my-3 sm:my-4 py-2.5 sm:py-3 px-3 sm:px-4 bg-white/[0.03] border-l-2 border-[#BFA175] rounded-r">
+            <span class="font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#BFA175] uppercase block mb-1">O Deslocamento</span>
+            <p class="font-futura text-sm sm:text-base lg:text-lg tracking-[0.12em] sm:tracking-[0.15em] text-white uppercase font-normal">
               corpo &rarr; objeto &rarr; roupa &rarr; espaço
             </p>
           </div>
           <p>
             A fotografia é o registro inicial. A inteligência artificial participa da investigação e da reconstrução. A pintura transforma essas descobertas em outra matéria.
           </p>
-          <p class="font-medium text-white italic border-l border-white/30 pl-4 py-1">
+          <p class="font-medium text-white italic border-l border-white/30 pl-3 sm:pl-4 py-1">
             “Entre o que foi fotografado, o que foi vivido e aquilo que hoje consigo imaginar existe o espaço onde a minissérie acontece.”
           </p>
         </div>
 
-        <div class="pt-3 flex items-center justify-between text-[9px] font-mono tracking-widest text-[#A4A29C] uppercase border-t border-white/[0.08]">
+        <div class="pt-2 sm:pt-3 flex items-center justify-between text-[8px] sm:text-[9px] font-mono tracking-widest text-[#A4A29C] uppercase border-t border-white/[0.08]">
           <span>DALLIDO.1988</span>
           <span>SÃO PAULO</span>
         </div>
@@ -372,14 +414,14 @@
 
     <!-- SALA 03: OBRA I -->
     <section class="slide-room" data-index="2">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="artwork-frame-interactive" onclick="openLightbox('./pista-obra-01.png', 'A PISTA — OBRA I', 'RECONSTRUÇÃO / ENQUADRAMENTO EXPANDIDO, SÃO PAULO')">
           <img src="./pista-obra-01.png" alt="A Pista — Obra I" loading="lazy">
-          <div class="zoom-badge">🔍 Clique para Ampliar</div>
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A PISTA — I</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A PISTA — I</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -391,14 +433,14 @@
 
     <!-- SALA 04: OBRA II (A PISTA VAZIA — EMOLDURADA) -->
     <section class="slide-room" data-index="3">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="artwork-frame-interactive" onclick="openLightbox('./pista-obra-02-emoldurada.jpg', 'A PISTA — OBRA II (PISTA VAZIA)', 'PINTURA EMOLDURADA & MEMÓRIA EXPANDIDA, SÃO PAULO')">
           <img src="./pista-obra-02-emoldurada.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto.jpg';" alt="A Pista — Obra II (Pista Vazia Emoldurada)" loading="lazy">
-          <div class="zoom-badge">🔍 Clique para Ampliar</div>
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A PISTA — II (PISTA VAZIA)</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A PISTA — II (PISTA VAZIA)</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -410,14 +452,14 @@
 
     <!-- SALA 05: OBRA III -->
     <section class="slide-room" data-index="4">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="artwork-frame-interactive" onclick="openLightbox('./pista-obra-03.png', 'A PISTA — OBRA III', 'CORPO EM TRANSE & PERSPECTIVA QUADRADA, SÃO PAULO')">
           <img src="./pista-obra-03.png" alt="A Pista — Obra III" loading="lazy">
-          <div class="zoom-badge">🔍 Clique para Ampliar</div>
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A PISTA — III</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A PISTA — III</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -429,14 +471,14 @@
 
     <!-- SALA 06: OBRA IV -->
     <section class="slide-room" data-index="5">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="artwork-frame-interactive" onclick="openLightbox('./pista-obra-04.png', 'A PISTA — OBRA IV', 'ENQUADRAMENTO VERTICAL & MATÉRIA SOMÁTICA, SÃO PAULO')">
           <img src="./pista-obra-04.png" alt="A Pista — Obra IV" loading="lazy">
-          <div class="zoom-badge">🔍 Clique para Ampliar</div>
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A PISTA — IV</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A PISTA — IV</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -448,33 +490,33 @@
 
     <!-- SALA 07: MATRIZ FOTOGRÁFICA ORIGINAL (L1010595) -->
     <section class="slide-room" data-index="6">
-      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-        <div class="lg:col-span-5 space-y-6 text-left z-10">
-          <div class="space-y-2">
-            <span class="font-mono text-[9px] tracking-[0.35em] text-[#BFA175] uppercase block">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-center my-auto">
+        <div class="lg:col-span-5 space-y-4 sm:space-y-6 text-left z-10 order-2 lg:order-1">
+          <div class="space-y-1.5">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.35em] text-[#BFA175] uppercase block">
               MATRIZ FOTOGRÁFICA
             </span>
-            <h3 class="font-futura text-3xl sm:text-4xl font-light tracking-[0.15em] text-white uppercase">
+            <h3 class="font-futura text-2xl sm:text-3xl lg:text-4xl font-light tracking-[0.15em] text-white uppercase">
               O PONTO DE PARTIDA CONCRETO
             </h3>
           </div>
 
-          <div class="w-10 h-[1px] bg-white/20"></div>
+          <div class="w-10 sm:w-12 h-[1px] bg-white/20"></div>
 
-          <p class="text-xs text-[#A4A29C] leading-relaxed font-light tracking-wide max-w-sm">
-            Fotografia original <code class="text-white/80">L1010595</code> registrada em São Paulo. O documento inicial cuja borda foi atravessada pela imaginação e pela reconstrução algorítmica de DALLIDO.1988.
+          <p class="text-xs sm:text-sm text-[#A4A29C] leading-relaxed font-light tracking-wide max-w-sm">
+            Fotografia original <code class="text-white/80 bg-white/5 px-1.5 py-0.5 rounded font-mono text-[10px]">L1010595</code> registrada em São Paulo. O documento inicial cuja borda foi atravessada pela imaginação e pela reconstrução de DALLIDO.1988.
           </p>
 
-          <div class="font-mono text-[10px] text-[#BFA175] tracking-widest uppercase">
+          <div class="font-mono text-[9px] sm:text-[10px] text-[#BFA175] tracking-widest uppercase">
             REGISTRO CRÚ &bull; LEICA &bull; SÃO PAULO
           </div>
         </div>
 
-        <div class="lg:col-span-7 flex justify-center lg:justify-end items-center">
+        <div class="lg:col-span-7 flex flex-col justify-center items-center lg:items-end order-1 lg:order-2">
           <div class="split-artwork-frame" onclick="openLightbox('./pista-original-l1010595.jpg', 'MATRIZ ORIGINAL L1010595', 'FOTOGRAFIA ORIGINAL, SÃO PAULO, DALLIDO.1988')">
             <img src="./pista-original-l1010595.jpg" onerror="this.onerror=null; this.src='./L1010595.JPG';" alt="Matriz Fotográfica Original L1010595" loading="lazy">
-            <div class="zoom-badge">🔍 Clique para Ampliar</div>
           </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
       </div>
     </section>
@@ -482,27 +524,27 @@
 
     <!-- SALA 08: ENCERRAMENTO -->
     <section class="slide-room" data-index="7">
-      <div class="max-w-4xl text-center space-y-8">
-        <div class="space-y-3">
-          <span class="font-mono text-[9px] tracking-[0.4em] text-[#BFA175] uppercase block">
+      <div class="max-w-4xl text-center space-y-4 sm:space-y-8 my-auto w-full px-2">
+        <div class="space-y-2 sm:space-y-3">
+          <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.35em] sm:tracking-[0.4em] text-[#BFA175] uppercase block">
             ENCERRAMENTO DA MINISSÉRIE
           </span>
-          <h2 class="font-futura text-5xl lg:text-6xl font-light tracking-[0.2em] uppercase text-white leading-tight">
+          <h2 class="font-futura text-3xl sm:text-5xl lg:text-6xl font-light tracking-[0.18em] sm:tracking-[0.2em] uppercase text-white leading-tight">
             A PISTA
           </h2>
-          <p class="font-futura text-lg tracking-[0.2em] text-[#A4A29C] uppercase">
+          <p class="font-futura text-xs sm:text-base lg:text-lg tracking-[0.18em] sm:tracking-[0.2em] text-[#A4A29C] uppercase">
             SÃO PAULO &bull; DALLIDO.1988
           </p>
         </div>
 
-        <div class="w-16 h-[1px] bg-white/20 mx-auto"></div>
+        <div class="w-12 sm:w-16 h-[1px] bg-white/20 mx-auto"></div>
 
-        <p class="text-xs text-[#A4A29C] max-w-lg mx-auto leading-relaxed font-light tracking-wide">
+        <p class="text-xs sm:text-sm text-[#A4A29C] max-w-lg mx-auto leading-relaxed font-light tracking-wide">
           As imagens finais habitam a zona intermediária entre aquilo que aconteceu, aquilo que foi fotografado e aquilo que a memória e a inteligência artificial conseguem reconstruir.
         </p>
 
-        <div class="pt-6">
-          <button onclick="goToSlide(0)" class="px-6 py-3 bg-transparent border border-white/20 rounded-sm text-xs font-mono tracking-[0.2em] uppercase text-white hover:border-white transition">
+        <div class="pt-2 sm:pt-4">
+          <button onclick="goToSlide(0)" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-transparent border border-white/20 rounded-sm text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-white hover:border-white transition">
             &larr; REINICIAR PERCURSO
           </button>
         </div>
@@ -513,38 +555,39 @@
 
 
   <!-- BARRA INFERIOR GRAFITE (FIXA) -->
-  <footer class="fixed bottom-0 left-0 right-0 z-40 px-10 py-5 flex items-center justify-between border-t border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
-    <div class="flex items-center gap-4">
+  <footer class="fixed bottom-0 left-0 right-0 z-40 px-4 sm:px-8 lg:px-10 py-3 sm:py-4 flex items-center justify-between border-t border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
+    <div class="flex items-center gap-2 sm:gap-4">
       <button id="btnPrev" onclick="prevSlide()" class="graphite-nav-btn" aria-label="Sala Anterior">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
       </button>
       <button id="btnNext" onclick="nextSlide()" class="graphite-nav-btn" aria-label="Próxima Sala">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
       </button>
-      <span class="text-[11px] font-mono text-[#A4A29C] hidden sm:inline ml-3 tracking-wider">
-        USE AS SETAS OU CLIQUE NAS OBRAS PARA AMPLIAR
+      <span class="text-[10px] sm:text-[11px] font-mono text-[#A4A29C] hidden md:inline ml-2 tracking-wider">
+        SETAS ← → OU DESLIZE NA TELA
       </span>
     </div>
 
-    <div class="w-40 bg-white/10 h-[1.5px] rounded-full overflow-hidden hidden md:block">
+    <!-- Barra de Progresso Grafite -->
+    <div class="w-24 sm:w-36 md:w-44 bg-white/10 h-[1.5px] rounded-full overflow-hidden">
       <div id="progressFill" class="graphite-progress" style="width: 12.5%;"></div>
     </div>
 
-    <div class="font-mono text-[9px] text-[#A4A29C] tracking-[0.2em] uppercase">
-      &copy; 2026 DALLIDO.1988 &bull; MINISSÉRIE A PISTA
+    <div class="font-mono text-[8px] sm:text-[9px] text-[#A4A29C] tracking-[0.18em] sm:tracking-[0.2em] uppercase">
+      &copy; 2026 DALLIDO.1988
     </div>
   </footer>
 
 
   <!-- LIGHTBOX MODAL DE ZOOM -->
   <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
-    <button class="absolute top-6 right-8 text-white/70 hover:text-white font-mono text-xs tracking-widest z-50 flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/10">
+    <button onclick="closeLightbox()" class="absolute top-4 right-4 sm:top-6 sm:right-8 text-white/80 hover:text-white font-mono text-[10px] sm:text-xs tracking-widest z-50 flex items-center gap-1.5 sm:gap-2 bg-black/60 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/15 backdrop-blur-md">
       <span>FECHAR</span> <span>&times;</span>
     </button>
     
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <img id="lightboxImg" src="" alt="Ampliação de Obra">
-      <div id="lightboxMeta" class="absolute bottom-4 left-6 right-6 text-center font-futura text-white text-xs tracking-[0.2em] uppercase bg-black/75 py-2.5 px-4 rounded backdrop-blur-md border border-white/10">
+      <div id="lightboxMeta" class="w-full text-center font-futura text-white text-[10px] sm:text-xs tracking-[0.16em] uppercase bg-black/80 py-2 sm:py-2.5 px-3 sm:px-4 mt-2 sm:mt-3 rounded backdrop-blur-md border border-white/10">
       </div>
     </div>
   </div>
@@ -557,7 +600,7 @@
     let soundEnabled = true;
     let audioCtx = null;
 
-    // Inicialização robusta do AudioContext com desbloqueio de autoplay
+    // Inicialização do AudioContext com desbloqueio
     function getAudioContext() {
       if (!audioCtx) {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -571,7 +614,6 @@
       return audioCtx;
     }
 
-    // Desbloqueio imediato na primeira interação do usuário
     function unlockAudio() {
       getAudioContext();
       window.removeEventListener('click', unlockAudio);
@@ -582,24 +624,22 @@
     window.addEventListener('keydown', unlockAudio, { passive: true });
     window.addEventListener('touchstart', unlockAudio, { passive: true });
 
-    // SOM MECÂNICO DE OBTURADOR / CLIQUE TÁTIL ANALÓGICO
+    // Som de obturador tátil analógico
     function playTactileClick() {
       if (!soundEnabled) return;
       try {
         const ctx = getAudioContext();
         if (!ctx) return;
-        if (ctx.state === 'suspended') {
-          ctx.resume();
-        }
+        if (ctx.state === 'suspended') ctx.resume();
 
         const t = ctx.currentTime;
 
-        // 1. Transiente de ruído mecânico (Palhetas do obturador)
-        const bufferSize = Math.floor(ctx.sampleRate * 0.032);
+        // Ruído do obturador
+        const bufferSize = Math.floor(ctx.sampleRate * 0.028);
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.007));
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.006));
         }
 
         const noise = ctx.createBufferSource();
@@ -607,53 +647,36 @@
 
         const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = "bandpass";
-        noiseFilter.frequency.setValueAtTime(3400, t);
-        noiseFilter.Q.setValueAtTime(2.0, t);
+        noiseFilter.frequency.setValueAtTime(3200, t);
+        noiseFilter.Q.setValueAtTime(2.2, t);
 
         const noiseGain = ctx.createGain();
-        noiseGain.gain.setValueAtTime(0.5, t);
-        noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.032);
+        noiseGain.gain.setValueAtTime(0.4, t);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.028);
 
         noise.connect(noiseFilter);
         noiseFilter.connect(noiseGain);
         noiseGain.connect(ctx.destination);
 
-        // 2. Golpe acústico somático / clack analógico
+        // Click somático
         const osc = ctx.createOscillator();
         const oscGain = ctx.createGain();
         osc.type = "sine";
-        osc.frequency.setValueAtTime(620, t);
-        osc.frequency.exponentialRampToValueAtTime(90, t + 0.024);
+        osc.frequency.setValueAtTime(580, t);
+        osc.frequency.exponentialRampToValueAtTime(80, t + 0.022);
 
-        oscGain.gain.setValueAtTime(0.4, t);
-        oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.028);
+        oscGain.gain.setValueAtTime(0.35, t);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
 
         osc.connect(oscGain);
         oscGain.connect(ctx.destination);
 
-        // 3. Micro-fechamento do mecanismo (+16ms)
-        const osc2 = ctx.createOscillator();
-        const osc2Gain = ctx.createGain();
-        osc2.type = "triangle";
-        osc2.frequency.setValueAtTime(1100, t + 0.016);
-        osc2.frequency.exponentialRampToValueAtTime(220, t + 0.034);
-
-        osc2Gain.gain.setValueAtTime(0.0, t);
-        osc2Gain.gain.setValueAtTime(0.3, t + 0.016);
-        osc2Gain.gain.exponentialRampToValueAtTime(0.001, t + 0.038);
-
-        osc2.connect(osc2Gain);
-        osc2Gain.connect(ctx.destination);
-
-        // Início
         noise.start(t);
-        noise.stop(t + 0.035);
+        noise.stop(t + 0.03);
         osc.start(t);
-        osc.stop(t + 0.03);
-        osc2.start(t + 0.016);
-        osc2.stop(t + 0.04);
+        osc.stop(t + 0.028);
       } catch (e) {
-        console.warn("Audio Context Click:", e);
+        // Silencioso em caso de restrição de áudio
       }
     }
 
@@ -677,6 +700,12 @@
 
       document.getElementById('btnPrev').disabled = (currentSlide === 0);
       document.getElementById('btnNext').disabled = (currentSlide === totalSlides - 1);
+
+      // Scroll para o topo da sala ao entrar (mobile)
+      const activeSection = document.querySelector(`.slide-room[data-index="${currentSlide}"]`);
+      if (activeSection) {
+        activeSection.scrollTop = 0;
+      }
     }
 
     function nextSlide() {
@@ -720,18 +749,35 @@
       }
     });
 
-    // TOUCH SWIPE
+    // TOUCH SWIPE INTELIGENTE (Distinção entre scroll vertical e troca de sala horizontal)
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
 
     window.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     window.addEventListener('touchend', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox && lightbox.classList.contains('active')) return;
+
       touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) nextSlide();
-      else if (touchEndX > touchStartX + 50) prevSlide();
+      touchEndY = e.changedTouches[0].screenY;
+
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Só aciona troca de sala se o gesto for predominantemente horizontal e tiver deslocamento suficiente
+      if (Math.abs(diffX) > Math.abs(diffY) * 1.5 && Math.abs(diffX) > 45) {
+        if (diffX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
     }, { passive: true });
 
     // ZOOM LIGHTBOX
